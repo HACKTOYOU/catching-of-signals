@@ -1,0 +1,32 @@
+Program for Catching of Signals:
+
+#include<unistd.h>
+#include<stdio.h>
+#include<signal.h>
+
+static void sig_fun(int);	
+
+int main(void)
+{
+if(signal(SIGUSR1, sig_fun)==SIG_ERR) 	
+printf("\nCan't Catch SIGUSR1\n");		
+								
+
+if(signal(SIGUSR2, sig_fun)==SIG_ERR)	
+printf("\nCan't Catch SIGUSR2\n");
+
+for(;;) 							
+pause(); 							
+}
+
+static void sig_fun(int signo)
+{
+	if(signo == SIGUSR1)
+	printf("\nSIGUSR1 Recieved\n");
+        
+       else if(signo==SIGUSR2)
+	printf("\nSIGUSR2 Received\n");
+else
+	printf("\nRecieved signal is%d\n",signo); 
+						
+}
